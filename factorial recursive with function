@@ -1,0 +1,24 @@
+//recursive factorial
+#include<stdio.h>
+int factorial(int n);
+int main()
+{
+  int num;
+  printf("enter the integer: ");
+  scanf("%d",&num);
+  printf("the factorail of %d is:%d", num, factorial(num));
+  printf("\nsarshini");
+  printf("\n192321113");
+return 0;
+}
+int factorial(int n)
+{
+  if (n==0)
+  {
+    return 1;
+  }
+  else
+  {
+    return n*factorial(n-1);
+  }
+}
