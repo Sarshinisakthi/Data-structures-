@@ -1,0 +1,129 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct BTreeNode {
+    int *keys;  
+    int t;      
+    struct BTreeNode **child; 
+    int n;    
+    int leaf;   
+};
+struct BTreeNode *createNode(int t, int leaf) {
+    struct BTreeNode *newNode = (struct BTreeNode *)malloc(sizeof(struct BTreeNode));
+    newNode->keys = (int *)malloc((2 * t - 1) * sizeof(int));
+    newNode->child = (struct BTreeNode **)malloc((2 * t) * sizeof(struct BTreeNode *));
+    newNode->n = 0;
+    newNode->leaf = leaf;
+    return newNode;
+}
+void splitChild(struct BTreeNode *x, int i, struct BTreeNode *y) {
+    int t = x->t,j;
+    struct BTreeNode *z = createNode(t, y->leaf);
+    z->n = t - 1;
+    for (j = 0; j < t - 1; j++) {
+        z->keys[j] = y->keys[j + t];
+    }
+    if (y->leaf == 0) {
+        for (j = 0; j < t; j++) {
+            z->child[j] = y->child[j + t];
+        }
+    }
+    y->n = t - 1;
+    for (j = x->n; j >= i + 1; j--) {
+        x->child[j + 1] = x->child[j];
+    }
+    x->child[i + 1] = z;
+    for (j = x->n - 1; j >= i; j--) {
+        x->keys[j + 1] = x->keys[j];
+    }
+    x->keys[i] = y->keys[t - 1];
+    x->n = x->n + 1;
+}
+void insert(struct BTreeNode *root, int key) {
+    int t = root->t;
+    if (root->n == (2 * t - 1)) {
+        struct BTreeNode *s = createNode(t, 0);
+        s->child[0] = root;
+        root = s;
+        splitChild(s, 0, root);
+    }
+    struct BTreeNode *current = root;
+    while (current->leaf == 0) {
+        int i = current->n - 1;
+        while (i >= 0 && key < current->keys[i]) {
+            i--;
+        }
+        i++;
+        if (current->child[i]->n == (2 * t - 1)) {
+            splitChild(current, i, current->child[i]);
+            if (key > current->keys[i]) {
+                i++;
+            }
+        }
+        current = current->child[i];
+    }
+    int i = current->n - 1;
+    while (i >= 0 && key < current->keys[i]) {
+        current->keys[i + 1] = current->keys[i];
+        i--;
+    }
+    current->keys[i + 1] = key;
+    current->n = current->n + 1;
+}
+void display(struct BTreeNode *root) {
+	int i;
+    if (root != NULL) {
+        for (i = 0; i < root->n; i++) {
+            printf("%d ", root->keys[i]);
+        }
+        printf("\n");
+        if (root->leaf == 0) {
+            for (i = 0; i <= root->n; i++) {
+                display(root->child[i]);
+            }
+        }
+    }
+}
+int main() 
+{
+	printf("192321113\n");
+    int t, key, choice;
+    struct BTreeNode *root = NULL;
+    
+    printf("Enter the minimum degree of the B-Tree: ");
+    scanf("%d", &t);
+    
+    do {
+        printf("\nB-Tree Operations:\n");
+        printf("1. Insert a key\n");
+        printf("2. Display the B-Tree\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1:
+                printf("Enter the key to be inserted: ");
+                scanf("%d", &key);
+                if (root == NULL) {
+                    root = createNode(t, 1);
+                    root->keys[0] = key;
+                    root->n = 1;
+                } else {
+                    insert(root, key);
+                }
+                break;
+            case 2:
+                printf("B-Tree: ");
+                display(root);
+                break;
+            case 3:
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice! Please try again.\n");
+                break;
+        }
+    } while (choice != 3);
+    
+    return 0;
+}
