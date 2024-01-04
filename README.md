@@ -41,7 +41,7 @@ Find Max and Min
 5.	Intersect SLL
 6.	Reverse - SLL
 
-   Day 4:
+Day 4:
    
 1.Implement DLL with following operations
 Insert(Beg,Mid,End)
@@ -82,7 +82,7 @@ Day 6:
 2.  Write a function to evaluate a given postfix expression. The expression is "44 2 / 6 -"
 3. Write a function to convert an infix expression to postfix notation. The infix expression is " "(a + b) * c + d "
    
-5. Day 7
+Day 7:
    
 1.Implement Queue using array with following operations
 Enqueue( )
@@ -115,13 +115,13 @@ Rear( )
 5. Implement Stack using two queues
 6. Implement Queue using two Stacks
 
-7. Day 8:
+Day 8:
 
 1.Implement Binary tree
 2. Implement Binary Search Tree and perform Insertion and Deletion
 3. Create Binary Search Tree with Tree Traversal (Inorder, Preorder, Postorder and Level order)
 
-5. Day 9
+ Day 9:
 
 1.Implement a C Program for AVL tree and perform Insertion and Deletion of Nodes
 
@@ -129,3 +129,8 @@ Day 10:
 
 1. Implement a C Program for Red Black tree and perform Insertion and Deletion of Nodes
 2. Implement a C Program for Splay tree tree and perform Insertion and Deletion of Nodes
+   
+Day 11:
+   
+1. Implement a C Program for B Tree and perform Insertion of Nodes
+2. Implement a C Program for TRIE Tree and perform Insertion  of Nodes
