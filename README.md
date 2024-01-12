@@ -164,3 +164,8 @@ Day 16:
 
 1. Implement a C Program to find MST for the given graph using Prim's Algorithm
 2. Implement a C Program to find MST for the given graph using Kruskal's Algorithm
+   
+Day 17:
+
+1. Implement a C Program to find the shortest path for the given weighted directed graph using Dijkstra's Algorithm
+2. Implement a C Program to find MST shortest path for the given unweighted directed graph using Dijkstra's Algorithm
